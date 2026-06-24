@@ -1,8 +1,8 @@
-name: Deploy static content to Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"] # или master, укажите вашу ветку
+    branches: ["main"] # Если ваша ветка называется master, замените на "master"
 
 permissions:
   contents: read
@@ -14,20 +14,32 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build-and-deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/actions/configure-pages@v4
-      - name: Upload artifact
-        uses: actions/actions/upload-pages-artifact@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4 # ИСПРАВЛЕНО: правильный официальный путь
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4 # ИСПРАВЛЕНО: правильный официальный путь
         with:
-          path: './dist' # Указываем GitHub брать файлы строго из dist!
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3 # ИСПРАВЛЕНО: правильный официальный путь
+        with:
+          path: './dist'
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4 # ИСПРАВЛЕНО: правильный официальный путь
