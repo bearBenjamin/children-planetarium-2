@@ -1,0 +1,14 @@
+# Автоматически определять текстовые файлы и приводить их к стандарту LF при коммите
+* text=auto eol=lf
+
+# Явно указываем, что файлы картинок, шрифтов и спрайтов — бинарные,
+# и Git вообще не должен трогать в них переводы строк (иначе они повредятся)
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+*.svg binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+*.eot binary

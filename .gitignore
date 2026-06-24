@@ -1,0 +1,13 @@
+node_modules
+.idea
+.DS_Store
+
+# Игнорируем исходники в raw
+raw/**/*.jpg
+raw/**/*.jpeg
+raw/**/*.png
+raw/**/*.svg
+!raw/**/README.md
+
+# Игнорируем развернутый HTML в app (так как в dist будет сжатый)
+app/*.html

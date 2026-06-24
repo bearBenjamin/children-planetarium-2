@@ -1,0 +1,38 @@
+{
+	"name": "gulp-assembly",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "gulp",
+		"build": "gulp build",
+		"lint:css": "stylelint \"app/scss/**/*.scss\"",
+		"lint:css-fix": "stylelint \"app/scss/**/*.scss\" --fix",
+		"lint:js": "eslint \"app/js/**/*.js\"",
+		"lint:js-fix": "eslint \"app/js/**/*.js\" --fix"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"browser-sync": "^3.0.4",
+		"eslint": "^10.5.0",
+		"globals": "^17.7.0",
+		"gulp": "^5.0.1",
+		"gulp-autoprefixer": "^10.0.0",
+		"gulp-clean": "^0.4.0",
+		"gulp-concat": "^2.6.1",
+		"gulp-htmlmin": "^5.0.1",
+		"gulp-imagemin": "^8.0.0",
+		"gulp-pug": "^5.0.0",
+		"gulp-replace": "^1.1.4",
+		"gulp-sass": "^6.0.1",
+		"gulp-sharp-responsive": "^0.4.1",
+		"gulp-sourcemaps": "^3.0.0",
+		"gulp-svg-sprite": "^2.0.3",
+		"gulp-terser": "^2.1.0",
+		"sass": "^1.101.0",
+		"stylelint": "^17.13.0",
+		"stylelint-config-standard-scss": "^17.0.0"
+	}
+}
