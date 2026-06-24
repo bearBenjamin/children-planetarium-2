@@ -34,6 +34,14 @@ function htmlCompile() {
     .pipe(browserSync.stream());
 }
 
+// Компиляция и сжатие HTML для продакшена (Строго в dist)
+function htmlBuild() {
+  return src(['app/html/*.pug'])
+    .pipe(pug({ pretty: false })) // Отключаем красивые отступы для сжатия
+    .pipe(htmlmin({ collapseWhitespace: true, removeComments: true })) // Сжимаем код
+    .pipe(dest('dist')); // Складываем СТРОГО в корень папки dist
+}
+
 // Сборка стилей для разработки (в папку app)
 function styles() {
   return src('app/scss/style.scss')
@@ -162,7 +170,7 @@ function spriteBuild() {
 // Перенос ресурсов в папку dist с минификацией HTML
 function building() {
   return src([
-    'app/**/*.html',
+    // 'app/**/*.html',
     'app/css/style.min.css',
     'app/fonts/**/*',
   ], { base: 'app', allowEmpty: true, dot: true, encoding: false })
@@ -220,4 +228,6 @@ exports.browsersync = browsersync;
 exports.default = series(parallel(htmlCompile, imagesDev, spriteDev), parallel(styles, browsersync, watching));
 
 // запуск для сборки на хостинг gulp build
-exports.build = series(cleanDist, spriteBuild, parallel(stylesBuild, scriptsBuild, imagesBuild, building));
+// exports.build = series(cleanDist, spriteBuild, parallel(stylesBuild, scriptsBuild, imagesBuild, building));
+exports.build = series(cleanDist, spriteBuild, parallel(stylesBuild, scriptsBuild, imagesBuild, htmlBuild, building));
+
